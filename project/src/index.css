@@ -33,6 +33,7 @@ body {
   display: block;
   min-width: 320px;
   min-height: 100vh;
+  background-color: #ffffff; /* always keep page background white to avoid dark gutters */
 }
 
 h1 {
@@ -47,9 +48,9 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: transparent; /* do not force a filled background; use utility classes */
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: border-color 0.25s, background-color 0.15s;
 }
 button:hover {
   border-color: #646cff;
@@ -64,7 +65,51 @@ button:focus-visible {
   a:hover {
     color: #747bff;
   }
-  button {
-    background-color: #f9f9f9;
-  }
 }
+
+/* Ensure force-light wrapper doesn't get overridden by any browser defaults */
+.force-light button, body.force-light button {
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+/* Force a consistent (light) UI even when the OS prefers dark mode.
+   This ensures the Measurement Settings UI looks the same in light and dark.
+   We explicitly set color-scheme and override background/text utilities used by components. */
+/* NOTE: removed dark-mode overrides to keep the UI identical to light mode even when
+  the OS/browser prefers dark color scheme. The `.force-light` wrapper enforces
+  light styling across the app. */
+
+/* Explicit force-light mode: when applied via body.force-light or a wrapper .force-light,
+   make the UI use the light palette so it looks the same in both OS themes. */
+.force-light, body.force-light {
+  color-scheme: light !important;
+}
+
+body.force-light, .force-light {
+  background-color: #ffffff !important;
+  color: #213547 !important;
+}
+
+.force-light .bg-white, body.force-light .bg-white {
+  background-color: #ffffff !important;
+}
+
+.force-light .text-gray-500, .force-light .text-gray-400, .force-light .text-gray-600, .force-light .text-gray-700,
+body.force-light .text-gray-500, body.force-light .text-gray-400, body.force-light .text-gray-600, body.force-light .text-gray-700 {
+  color: #6b7280 !important;
+}
+
+.force-light .text-red-600, body.force-light .text-red-600 { color: #c53030 !important; }
+.force-light .border-red-300, .force-light .border-red-400, body.force-light .border-red-300, body.force-light .border-red-400 {
+  border-color: rgba(220, 38, 38, 0.25) !important;
+}
+
+.force-light .shadow, .force-light .shadow-sm, .force-light .shadow-lg,
+body.force-light .shadow, body.force-light .shadow-sm, body.force-light .shadow-lg {
+  box-shadow: 0 1px 2px rgba(16,24,40,0.04) !important;
+}
+
+/* Ensure Save button (bg-red-600) is visible in force-light too */
+.force-light .bg-red-600, body.force-light .bg-red-600 { background-color: #c53030 !important; color: #ffffff !important; }
+

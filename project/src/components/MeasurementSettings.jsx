@@ -55,7 +55,15 @@ export default function MeasurementSettings() {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div className="relative">
+      {/* positioned pencil near the column boundary (md+) to match screenshot */}
+      <button aria-label="edit" className="hidden md:inline-flex absolute top-6 left-[42%] -translate-x-1/2 w-10 h-10 rounded-full border p-2 text-gray-400 hover:text-gray-600 bg-white shadow-sm">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5">
+          <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
+        </svg>
+      </button>
+
+      <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
       <div className="md:col-span-5 col-span-1">
         <h2 className="text-2xl font-semibold mb-4">Measurement Settings</h2>
 
@@ -76,14 +84,12 @@ export default function MeasurementSettings() {
           />
         ) : (
           <>
+            
+
             <div className="bg-white rounded-lg shadow p-6 min-h-[320px] md:min-h-[560px] flex items-start justify-center">
               {/* Main page preview — centered pencil icon like design */}
               <div className="w-full max-w-md h-[220px] md:h-[420px] flex items-center justify-center">
-                <button className="w-12 h-12 md:w-14 md:h-14 rounded-full border p-2 text-gray-400 hover:text-gray-600">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 md:w-6 md:h-6">
-                    <path fill="currentColor" d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1.003 1.003 0 000-1.42l-2.34-2.34a1.003 1.003 0 00-1.42 0l-1.83 1.83 3.75 3.75 1.84-1.82z" />
-                  </svg>
-                </button>
+                {/* preview area intentionally left blank to match design */}
               </div>
             </div>
           </>
@@ -107,6 +113,7 @@ export default function MeasurementSettings() {
           onClose={() => setShowSuccess(false)}
         />
       )}
+      </div>
     </div>
   )
 }

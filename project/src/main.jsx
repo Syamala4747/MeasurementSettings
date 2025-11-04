@@ -5,6 +5,11 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <div className="force-light">
+      <App />
+    </div>
   </StrictMode>,
 )
+
+// Also add a body-level class to ensure page background is forced to light
+if (typeof document !== 'undefined' && document.body) document.body.classList.add('force-light')
